@@ -7,7 +7,7 @@ import App from './App';
 import reducers from './reducers';
 
 const store = configureStore({
-    reducer: {reducers}
+    reducer: reducers
 })
 
 ReactDOM.render(
