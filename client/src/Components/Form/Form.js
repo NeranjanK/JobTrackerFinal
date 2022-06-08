@@ -51,7 +51,7 @@ const Form = ({ currentId, setCurrentId }) => {
                 <TextField 
                 name="name" 
                 variant="outlined" 
-                label="Name" 
+                label="Company Name" 
                 fullWidth
                 value={jobData.name}
                 onChange={(e) => setJobData({ ...jobData, name: e.target.value })}  />
