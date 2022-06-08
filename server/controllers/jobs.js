@@ -1,7 +1,6 @@
-import NewJob from "../models/jobMessage";
+import NewJob from "../models/jobMessage.js";
 
 export const getJobs = async (req, res) => {
-    // res.send("This works!");
     try {
         const newJob = await NewJob.find();
 
@@ -13,6 +12,16 @@ export const getJobs = async (req, res) => {
     }
 } 
 
-export const createJob = (req, res) => {
-    res.send("Post creation!");
+export const createJob = async (req, res) => {
+    const job = req.body;
+
+    const newJob = new NewJob(job);
+
+    try {
+        await newJob.save();
+
+        res.status(201).json(newJob);
+    } catch (error) {
+        res.status(409).json({ message: error.message });
+    }
 }
