@@ -7,6 +7,8 @@ import dotenv from 'dotenv';
 import jobRoutes from './routes/jobs.js'
 import userRoutes from './routes/users.js';
 
+
+
 const app = express();
 
 dotenv.config();
@@ -26,5 +28,5 @@ app.use('/user', userRoutes);
 const PORT = process.env.PORT || 5000;
 
 mongoose.connect(process.env.CONNECTION_URL)
-    .then(() => app.listen(PORT, () => console.log(`Server running on port: ${PORT}`)))
+    .then(() => app.listen(process.env.PORT || PORT, () => console.log(`Server running on port: ${PORT}`)))
     .catch(() => console.log(error.message));

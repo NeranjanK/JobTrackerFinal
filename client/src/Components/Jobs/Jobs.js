@@ -100,7 +100,7 @@ const Jobs = ({setCurrentId }) => {
                                     </a>
                                 </td>
                                 <td align="center">
-                                    { (user?.currentUser?._id === job?.creator) || (user?.currentUser?.name === job?.creator) && (
+                                    { ((user?.currentUser?._id === job?.creator) || (user?.currentUser?.name === job?.creator)) && (
                                         <>
                                         <Button size="small"  onClick={() => setCurrentId(job._id)}><EditIcon fontSize="small" />Edit</Button>
                                         <Button size="small"  onClick={() => dispatch(deleteJob(job._id))}><DeleteIcon fontSize="small" />Delete</Button>
