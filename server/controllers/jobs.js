@@ -16,7 +16,7 @@ export const getJobs = async (req, res) => {
 export const createJob = async (req, res) => {
     const job = req.body;
 
-    const newJob = new NewJob(job);
+    const newJob = new NewJob({...job, creator: req.userId});
 
     try {
         await newJob.save();

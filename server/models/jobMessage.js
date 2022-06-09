@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 
 const jobSchema = mongoose.Schema({
     name: String,
+    creator: String,
     position: String,
     status: String,
     date: String

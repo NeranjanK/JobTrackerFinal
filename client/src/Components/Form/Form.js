@@ -17,6 +17,8 @@ const Form = ({ currentId, setCurrentId }) => {
     });
     const classes = useStyles();
     const dispatch = useDispatch();
+    const user = JSON.parse(localStorage.getItem('profile'));
+
 
     useEffect(() => {
         if(job) setJobData(job);
@@ -28,9 +30,9 @@ const Form = ({ currentId, setCurrentId }) => {
 
 
         if(currentId) {
-            dispatch(updateJob(currentId, jobData));
+            dispatch(updateJob(currentId, {...jobData, creator: user.currentUser.name}));
         } else{
-            dispatch(createJob(jobData));
+            dispatch(createJob({ ...jobData, creator: user.currentUser.name }));
         }
         clear();
     };
@@ -40,6 +42,17 @@ const Form = ({ currentId, setCurrentId }) => {
         setJobData({ name: '', position: '', date: '', status: ''});
 
     };
+
+    if (!user) {
+        return (
+            <Paper className={classes.paper}>
+                <Typography variant="h6" align="center">
+                    Sign In To Add New Jobs
+                </Typography>
+
+            </Paper>
+        )
+    }
 
 
     return (
@@ -80,7 +93,7 @@ const Form = ({ currentId, setCurrentId }) => {
                 value={jobData.status}
                 onChange={(e) => setJobData({ ...jobData, status: e.target.value })}  />
 
-                <Button className={classes.buttonSubmit} variant="contained" color="primary" size="large" type="submit" fullWidth>Submit</Button>
+                <Button className={classes.buttonSubmit} variant="contained" size="large" type="submit" fullWidth>Submit</Button>
                 <Button variant="contained" color="secondary" size="small" onClick={clear} fullWidth>Clear</Button>
             </form>
 
